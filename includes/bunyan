@@ -4,6 +4,7 @@ readonly __bunyanVersion='0.1.0'
 
 readonly __bunyanName=`basename $0`
 readonly __bunyanHost=`hostname`
+readonly __bunyanFormatVersion="0"
 
 __bunyanLevel=30 # info
 
@@ -15,8 +16,8 @@ function __bunyan() {
   local level="$1"
   shift 
   local logMesg="$@"
-  printf "{\"name\":\"%s\",\"hostname\":\"%s\",\"pid\":%s,\"level\":%d,\"msg\":\"%s\",\"time\":\"%s\",\"v\":0\n" \
-    "$__bunyanName" "$__bunyanHost" "$$" "$level" "$logMesg" "$now"
+  printf "{\"name\":\"%s\",\"hostname\":\"%s\",\"pid\":%s,\"level\":%d,\"msg\":\"%s\",\"time\":\"%s\",\"v\":%s}\n" \
+    "$__bunyanName" "$__bunyanHost" "$$" "$level" "$logMesg" "$now" "$__bunyanFormatVersion"
 }
 
 function __bunyanSetLevel() {
