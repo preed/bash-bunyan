@@ -11,8 +11,8 @@ function __bunyan() {
   # arg 1 is LEVEL
   # arg 2 is MSG
 
-  local now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-  local level=$1
+  local now="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+  local level="$1"
   shift 
   local logMesg="$@"
   printf "{\"name\":\"%s\",\"hostname\":\"%s\",\"pid\":%s,\"level\":%d,\"msg\":\"%s\",\"time\":\"%s\",\"v\":0\n" \
@@ -20,7 +20,8 @@ function __bunyan() {
 }
 
 function __bunyanSetLevel() {
-  local newlevel=$1
+  local newlevel="$1"
+
   case "$newlevel" in
     trace)
       __bunyanLevel=10
