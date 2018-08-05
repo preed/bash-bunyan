@@ -6,7 +6,11 @@ readonly __bunyanName=`basename $0`
 readonly __bunyanHost=`hostname`
 readonly __bunyanFormatVersion="0"
 
-__bunyanLevel=30 # info
+if [[ -z "$BUNYAN_LOGLEVEL" ]]; then
+  __bunyanLevel="$BUNRYAN_LOGLEVEL"
+else
+  __bunyanLevel=30 # info
+fi
 
 function __bunyan() {
   # arg 1 is LEVEL
