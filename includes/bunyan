@@ -11,6 +11,7 @@ if [[ -z "$BUNYAN_LOGLEVEL" ]]; then
 else
   __bunyanLevel=30 # info
 fi
+__bunyanOutput="${BUNYAN_OUTPUT:-/dev/stderr}"
 
 function __bunyan() {
   # arg 1 is LEVEL
@@ -21,7 +22,14 @@ function __bunyan() {
   shift 
   local logMesg="$@"
   printf "{\"name\":\"%s\",\"hostname\":\"%s\",\"pid\":%s,\"level\":%d,\"msg\":\"%s\",\"time\":\"%s\",\"v\":%s}\n" \
-    "$__bunyanName" "$__bunyanHost" "$$" "$level" "$logMesg" "$now" "$__bunyanFormatVersion"
+    "$__bunyanName" "$__bunyanHost" "$$" "$level" "$logMesg" "$now" "$__bunyanFormatVersion" > "$__bunyanOutput"
+}
+
+function __bunyanSetOutput() {
+  local newOutput="$1"
+  if [[ -n "$newOutput" ]]; then
+    __bunyanOutput="$newOutput"
+  fi
 }
 
 function __bunyanSetLevel() {
