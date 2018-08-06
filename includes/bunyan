@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-readonly __bunyanVersion='0.1.0'
+readonly __bunyanVersion='0.1.1'
 
 readonly __bunyanName=`basename $0`
 readonly __bunyanHost=`hostname`
