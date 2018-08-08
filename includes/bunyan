@@ -15,7 +15,7 @@ function __bunyan() {
 
   local _now="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
   local _level="$1"
-  shift 
+  shift
   local _logMesg="$@"
   printf "{\"name\":\"%s\",\"hostname\":\"%s\",\"pid\":%s,\"level\":%d,\"msg\":\"%s\",\"time\":\"%s\",\"v\":%s}\n" \
     "$__bunyanName" "$__bunyanHost" "$$" "$_level" "$_logMesg" "$_now" "$__bunyanFormatVersion" > "$__bunyanOutput"
@@ -57,26 +57,26 @@ function __bunyanSetLevel() {
 }
 
 
-function trace() { 
-  [[ $__bunyanLevel -le 10 ]] &&  __bunyan 10 "$@" 
+function trace() {
+  [[ $__bunyanLevel -le 10 ]] &&  __bunyan 10 "$@"
 }
 
-function debug() { 
-  [[ $__bunyanLevel -le 20 ]] && __bunyan 20 "$@" 
+function debug() {
+  [[ $__bunyanLevel -le 20 ]] && __bunyan 20 "$@"
 }
 
-function info()  { 
-  [[ $__bunyanLevel -le 30 ]] && __bunyan 30 "$@" 
+function info()  {
+  [[ $__bunyanLevel -le 30 ]] && __bunyan 30 "$@"
 }
 
-function warn()  { 
-  [[ $__bunyanLevel -le 40 ]] && __bunyan 40 "$@" 
+function warn()  {
+  [[ $__bunyanLevel -le 40 ]] && __bunyan 40 "$@"
 }
 
-function error() { 
-  [[ $__bunyanLevel -le 50 ]] && __bunyan 50 "$@" 
+function error() {
+  [[ $__bunyanLevel -le 50 ]] && __bunyan 50 "$@"
 }
 
-function fatal() { 
-  [[ $__bunyanLevel -le 60 ]] && __bunyan 60 "$@" 
+function fatal() {
+  [[ $__bunyanLevel -le 60 ]] && __bunyan 60 "$@"
 }
