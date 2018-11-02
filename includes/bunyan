@@ -17,7 +17,7 @@ function __bunyan() {
   shift
   local _logMesg="$@"
   printf "{\"name\":\"%s\",\"hostname\":\"%s\",\"pid\":%s,\"level\":%d,\"msg\":\"%s\",\"time\":\"%s\",\"v\":%s}\n" \
-    "$__bunyanName" "$__bunyanHost" "$$" "$_level" "$_logMesg" "$_now" "$__bunyanFormatVersion" > "$__bunyanOutput"
+    "$__bunyanName" "$__bunyanHost" "$$" "$_level" "$_logMesg" "$_now" "$__bunyanFormatVersion" >> "$__bunyanOutput"
 }
 
 function __bunyanSetOutput() {
