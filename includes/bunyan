@@ -7,10 +7,18 @@ readonly __bunyanFormatVersion="0"
 
 __bunyanLevel="${BUNYAN_LOGLEVEL:-30}" # info
 __bunyanOutput="${BUNYAN_OUTPUT:-/dev/stderr}"
+__bunyanOutputDir="$(dirname "$__bunyanOutput")"
 
 function __bunyan() {
   # arg 1 is LEVEL
   # arg 2 is MSG
+
+  # If the target directory for the log doesn't exist, we won't emit the log
+  # message. Users of this library need to deal ensure the parent directory
+  # of the log is created.
+  if [[ ! -d "$__bunyanOutputDir" ]]; then
+    return
+  fi
 
   local _now="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
   local _level="$1"
@@ -24,6 +32,7 @@ function __bunyanSetOutput() {
   local _newOutput="$1"
   if [[ -n "$_newOutput" ]]; then
     __bunyanOutput="$_newOutput"
+    __bunyanOutputDir="$(dirname "$__bunyanOutput")"
   fi
 }
 
