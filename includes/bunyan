@@ -1,13 +1,15 @@
 
-readonly __bunyanVersion='0.2.0'
+readonly __BUNYAN_VERSION='0.2.0'
+
+readonly __BUNYAN_SCRIPT_NAME=`basename $0`
+readonly __BUNYAN_HOST=`hostname`
+readonly __BUNYAN_FORMAT_VERSION="0"
+
 # If this is set, all bunyan log messages will be redirected to this file,
 # immaterial of where the caller set the output to go to. Useful for developer
 # debugging.
 readonly BUNYAN_OUTPUT_OVERRIDE="${BUNYAN_OUTPUT_OVERRIDE:-}"
 
-readonly __bunyanName=`basename $0`
-readonly __bunyanHost=`hostname`
-readonly __bunyanFormatVersion="0"
 
 __bunyanLevel="${BUNYAN_LOGLEVEL:-30}" # info
 __bunyanOutput="${BUNYAN_OUTPUT:-/dev/stderr}"
@@ -29,7 +31,7 @@ function __bunyan() {
   shift
   local _logMesg="$@"
   printf "{\"name\":\"%s\",\"hostname\":\"%s\",\"pid\":%s,\"level\":%d,\"msg\":\"%s\",\"time\":\"%s\",\"v\":%s}\n" \
-    "$__bunyanName" "$__bunyanHost" "$$" "$_level" "$_logMesg" "$_now" "$__bunyanFormatVersion" >> "$__bunyanOutput"
+    "$__BUNYAN_SCRIPT_NAME" "$__BUNYAN_HOST" "$$" "$_level" "$_logMesg" "$_now" "$__BUNYAN_FORMAT_VERSION" >> "$__bunyanOutput"
 }
 
 function __bunyanSetOutput() {
