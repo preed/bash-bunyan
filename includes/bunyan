@@ -1,5 +1,5 @@
 
-readonly __BUNYAN_VERSION='0.2.0'
+readonly __BUNYAN_VERSION='0.2.1'
 
 readonly __BUNYAN_SCRIPT_NAME=`basename $0`
 readonly __BUNYAN_HOST=`hostname`
@@ -9,7 +9,6 @@ readonly __BUNYAN_FORMAT_VERSION="0"
 # immaterial of where the caller set the output to go to. Useful for developer
 # debugging.
 readonly BUNYAN_OUTPUT_OVERRIDE="${BUNYAN_OUTPUT_OVERRIDE:-}"
-
 
 __bunyanLevel="${BUNYAN_LOGLEVEL:-30}" # info
 __bunyanOutput="${BUNYAN_OUTPUT:-/dev/stderr}"
