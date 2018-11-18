@@ -1,5 +1,9 @@
 
 readonly __bunyanVersion='0.2.0'
+# If this is set, all bunyan log messages will be redirected to this file,
+# immaterial of where the caller set the output to go to. Useful for developer
+# debugging.
+readonly BUNYAN_OUTPUT_OVERRIDE="${BUNYAN_OUTPUT_OVERRIDE:-}"
 
 readonly __bunyanName=`basename $0`
 readonly __bunyanHost=`hostname`
@@ -30,7 +34,7 @@ function __bunyan() {
 
 function __bunyanSetOutput() {
   local _newOutput="$1"
-  if [[ -n "$_newOutput" ]]; then
+  if [[ -n "$_newOutput" && -z "$BUNYAN_OUTPUT_OVERRIDE" ]]; then
     __bunyanOutput="$_newOutput"
     __bunyanOutputDir="$(dirname "$__bunyanOutput")"
   fi
